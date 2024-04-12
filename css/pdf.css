@@ -1,0 +1,15 @@
+table {
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid black;
+}
+	
+	.samFont1 {
+		font-size:2.5em !important;
+	}
+
+	.samFont2 {
+		font-size:2.5em !important;
+	}

@@ -1,0 +1,421 @@
+.wrapNotification{
+	float: left;
+	width: 150px;
+	height: 210px;
+	top: 100px;
+	left: 10px;
+	position: absolute;
+}
+
+.wrapMain{
+	width: 75px;
+	height: 210px;
+	background: #fdfdd9;
+	border: 1px solid #800000;				
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+	
+.wrapSecondtrust{
+	/* background-color:black; */
+	width: 75px;
+	background-color: #FDFDD9;
+	height: 210px;
+	position: absolute;
+	
+	top: 0;
+	left: 0;
+	z-index: 10;
+}	
+
+.wrapHeader{
+	float: left;
+	width: 75px;
+	height: 30px;
+	background: #800000;
+	border-bottom: 1px solid #FDFDD9;
+}
+
+.glyphicon-info-sign{
+	display: block;
+	margin: auto;
+	padding: 1px 0;
+}
+
+.wrapShashSeva{
+	position: relative;
+	display: inline-block;
+	float: left;
+	width: 75px;
+	height: 60px;
+	background: #800000;
+	border-bottom: 1px solid #FDFDD9;
+}
+
+.wrapShashSeva .tooltipShashSeva {
+	visibility: hidden;
+	background-color: #FDFDD9;
+	color: #800000;
+	text-align: center;
+	border-radius: 6px;
+	padding: 5px 0;
+	border: 1px solid #800000;
+
+	/* Position the tooltip */
+	position: absolute;
+	z-index: 1;
+	top: 15px;
+	left: 76px;
+}
+
+.wrapShashSeva:hover .tooltipShashSeva {
+	visibility: visible;
+}
+
+.txtShashGenerate{
+	position: relative;
+	padding-top: 15px;
+	padding-left: 2px;
+}
+
+.wrapShashLoss{
+	position: relative;
+	display: inline-block;
+	float: left;
+	width: 75px;
+	height: 60px;
+	background: #800000;
+	border-bottom: 1px solid #FDFDD9;
+}
+
+.wrapShashLoss .tooltipShashLoss {
+	visibility: hidden;
+	background-color: #FDFDD9;
+	color: #800000;
+	text-align: center;
+	border-radius: 6px;
+	padding: 5px 0;
+	border: 1px solid #800000;
+
+	/* Position the tooltip */
+	position: absolute;
+	z-index: 1;
+	top: 15px;
+	left: 76px;
+}
+
+.wrapShashLoss:hover .tooltipShashLoss {
+	visibility: visible;
+}
+
+.txtShashLoss{
+	position: relative;
+	padding-top: 15px;
+	padding-left: 2px;
+}
+
+.wrapShSevaPrice{
+	position: relative;
+	display: inline-block;
+	float: left;
+	width: 75px;
+	height: 60px;
+	background: #800000;
+	border-bottom: 1px solid #FDFDD9;
+}	
+
+.wrapShSevaPrice .tooltipShashPrice {
+	visibility: hidden;
+	background-color: #FDFDD9;
+	color: #800000;
+	text-align: center;
+	border-radius: 6px;
+	padding: 5px 0;
+	border: 1px solid #800000;
+
+	/* Position the tooltip */
+	position: absolute;
+	z-index: 1;
+	top: 15px;
+	left: 76px;
+}
+
+.wrapShSevaPrice:hover .tooltipShashPrice {
+	visibility: visible;
+}
+
+.wrapFDexpire{
+	position: relative;
+	display: inline-block;
+	float: left;
+	width: 75px;
+	height: 60px;
+	background: #800000;
+	border-bottom: 1px solid #FDFDD9;
+}
+	
+
+.wrapFDexpire .tooltipFd {
+	visibility: hidden;
+	background-color: #FDFDD9;
+	color: #800000;
+	text-align: center;
+	border-radius: 6px;
+	padding: 5px 0;
+	border: 1px solid #800000;
+
+	/* Position the tooltip */
+	position: absolute;
+	z-index: 1;
+	top: 15px;
+	left: 76px;
+}
+
+
+
+.wrapFDexpire:hover .tooltipFd {
+	visibility: visible;
+}
+
+
+.txtShashPrice{
+	position: relative;
+	padding-top: 15px;
+	padding-left: 2px;
+}
+
+.txtfdexpire{
+	position: relative;
+	padding-top: 15px;
+	padding-left: 2px;
+}
+
+.wrapChequePending{
+	position: relative;
+	display: inline-block;
+	float: left;
+	width: 75px;
+	height: 60px;
+	background: #800000;
+	border-bottom: 1px solid #FDFDD9;
+}
+.wrapFinanceChequePending{
+	position: relative;
+	display: inline-block;
+	float: left;
+	width: 75px;
+	height: 60px;
+	background: #800000;
+	border-bottom: 1px solid #FDFDD9;
+}
+.txtChequePending{
+	position: relative;
+	/* padding-top: 15px; */
+	padding-left: 2px;
+}
+.wrapFinanceTrustChequePending{
+	position: relative;
+	display: inline-block;
+	float: left;
+	width: 75px;
+	height: 60px;
+	background: #800000;
+	border-bottom: 1px solid #FDFDD9;
+}
+.wrapFinanceTrustEventChequePending{
+	position: relative;
+	display: inline-block;
+	float: left;
+	width: 75px;
+	height: 60px;
+	background: #800000;
+	border-bottom: 1px solid #FDFDD9;
+}
+
+.txtTrustChequePending{
+	position: relative;
+	/* padding-top: 15px; */
+	padding-left: 2px;
+}
+
+
+.wrapEventChequePending{
+	position: relative;
+	display: inline-block;
+	float: left;
+	width: 75px;
+	height: 60px;
+	background: #800000;
+	border-bottom: 1px solid #FDFDD9;
+}
+
+.wrapEventChequePending .tooltipEventChequePending{
+	visibility: hidden;
+	background-color: #FDFDD9;
+	color: #800000;
+	text-align: center;
+	border-radius: 6px;
+	padding: 5px 0;
+	border: 1px solid #800000;
+
+	/* Position the tooltip */
+	position: absolute;
+	z-index: 1;
+	top: 15px;
+	left: 76px;
+}
+.wrapEventChequePending:hover .tooltipEventChequePending {
+	visibility: visible;
+}
+
+.wrapFinanceTrustChequePending .tooltipFinanceTrustChequePending{
+	visibility: hidden;
+	background-color: #FDFDD9;
+	color: #800000;
+	text-align: center;
+	border-radius: 6px;
+	padding: 5px 0;
+	border: 1px solid #800000;
+
+	/* Position the tooltip */
+	position: absolute;
+	z-index: 1;
+	top: 15px;
+	left: 76px;
+}
+.wrapFinanceTrustChequePending:hover .tooltipFinanceTrustChequePending {
+	visibility: visible;
+}
+
+.wrapFinanceTrustEventChequePending .tooltipFinanceTrustEventChequePending {
+	visibility: hidden;
+	background-color: #FDFDD9;
+	color: #800000;
+	text-align: center;
+	border-radius: 6px;
+	padding: 5px 0;
+	border: 1px solid #800000;
+
+	/* Position the tooltip */
+	position: absolute;
+	z-index: 1;
+	top: 15px;
+	left: 76px;
+}
+.wrapFinanceTrustEventChequePending :hover  .tooltipFinanceTrustEventChequePending {
+	visibility: visible;
+}
+
+.wrapFinanceChequePending .tooltipFinanceChequePending{
+	visibility: hidden;
+	background-color: #FDFDD9;
+	color: #800000;
+	text-align: center;
+	border-radius: 6px;
+	padding: 5px 0;
+	border: 1px solid #800000;
+
+	/* Position the tooltip */
+	position: absolute;
+	z-index: 1;
+	top: 15px;
+	left: 76px;
+}
+.wrapFinanceChequePending:hover .tooltipFinanceChequePending {
+	visibility: visible;
+}
+
+.wrapChequePending .tooltipChequePending {
+	visibility: hidden;
+	background-color: #FDFDD9;
+	color: #800000;
+	text-align: center;
+	border-radius: 6px;
+	padding: 5px 0;
+	border: 1px solid #800000;
+
+	/* Position the tooltip */
+	position: absolute;
+	z-index: 1;
+	top: 15px;
+	left: 76px;
+}
+
+
+
+
+.wrapChequePending:hover .tooltipChequePending {
+	visibility: visible;
+}
+
+
+.badge41 {
+	position: absolute;top: 2px;left: 55px;padding: 2px 5px 0px 5px;border-radius:100px;
+	background: -webkit-linear-gradient(top, #fdfdd9 0%,#fdfdd9 100%);
+	box-shadow: 0 1px 2px rgba(0,0,0,.5), 0 1px 4px rgba(0,0,0,.4), 0 0 1px rgba(0,0,0,.7) inset, 0 10px 0px rgba(255,255,255,.11) inset; -webkit-background-clip: padding-box;font:bold 12px/15px "Helvetica Neue", sans-serif; 
+	color: #800000;text-decoration: none;text-shadow: 0 -1px 0 rgba(0,0,0,.6);z-index: 1;
+}
+
+.badge42 {
+	position: absolute;top: 2px;left: 55px;padding: 2px 5px 0px 5px;border-radius:100px;
+	background: -webkit-linear-gradient(top, #fdfdd9 0%,#fdfdd9 100%);
+	box-shadow: 0 1px 2px rgba(0,0,0,.5), 0 1px 4px rgba(0,0,0,.4), 0 0 1px rgba(0,0,0,.7) inset, 0 10px 0px rgba(255,255,255,.11) inset; -webkit-background-clip: padding-box;font:bold 12px/15px "Helvetica Neue", sans-serif; 
+	color: #800000;text-decoration: none;text-shadow: 0 -1px 0 rgba(0,0,0,.6);z-index: 1;
+}
+.badge43 {
+	position: absolute;top: 2px;left: 55px;padding: 2px 5px 0px 5px;border-radius:100px;
+	background: -webkit-linear-gradient(top, #fdfdd9 0%,#fdfdd9 100%);
+	box-shadow: 0 1px 2px rgba(0,0,0,.5), 0 1px 4px rgba(0,0,0,.4), 0 0 1px rgba(0,0,0,.7) inset, 0 10px 0px rgba(255,255,255,.11) inset; -webkit-background-clip: padding-box;font:bold 12px/15px "Helvetica Neue", sans-serif; 
+	color: #800000;text-decoration: none;text-shadow: 0 -1px 0 rgba(0,0,0,.6);z-index: 1;
+}
+.badge44 {
+	position: absolute;top: 2px;left: 55px;padding: 2px 5px 0px 5px;border-radius:100px;
+	background: -webkit-linear-gradient(top, #fdfdd9 0%,#fdfdd9 100%);
+	box-shadow: 0 1px 2px rgba(0,0,0,.5), 0 1px 4px rgba(0,0,0,.4), 0 0 1px rgba(0,0,0,.7) inset, 0 10px 0px rgba(255,255,255,.11) inset; -webkit-background-clip: padding-box;font:bold 12px/15px "Helvetica Neue", sans-serif; 
+	color: #800000;text-decoration: none;text-shadow: 0 -1px 0 rgba(0,0,0,.6);z-index: 1;
+}
+
+.badge45 {
+	position: absolute;top: 2px;left: 55px;padding: 2px 5px 0px 5px;border-radius:100px;
+	background: -webkit-linear-gradient(top, #fdfdd9 0%,#fdfdd9 100%);
+	box-shadow: 0 1px 2px rgba(0,0,0,.5), 0 1px 4px rgba(0,0,0,.4), 0 0 1px rgba(0,0,0,.7) inset, 0 10px 0px rgba(255,255,255,.11) inset; -webkit-background-clip: padding-box;font:bold 12px/15px "Helvetica Neue", sans-serif; 
+	color: #800000;text-decoration: none;text-shadow: 0 -1px 0 rgba(0,0,0,.6);z-index: 1;
+}
+.badge46 {
+	position: absolute;top: 2px;left: 55px;padding: 2px 5px 0px 5px;border-radius:100px;
+	background: -webkit-linear-gradient(top, #fdfdd9 0%,#fdfdd9 100%);
+	box-shadow: 0 1px 2px rgba(0,0,0,.5), 0 1px 4px rgba(0,0,0,.4), 0 0 1px rgba(0,0,0,.7) inset, 0 10px 0px rgba(255,255,255,.11) inset; -webkit-background-clip: padding-box;font:bold 12px/15px "Helvetica Neue", sans-serif; 
+	color: #800000;text-decoration: none;text-shadow: 0 -1px 0 rgba(0,0,0,.6);z-index: 1;
+}
+.badge47 {
+	position: absolute;top: 2px;left: 55px;padding: 2px 5px 0px 5px;border-radius:100px;
+	background: -webkit-linear-gradient(top, #fdfdd9 0%,#fdfdd9 100%);
+	box-shadow: 0 1px 2px rgba(0,0,0,.5), 0 1px 4px rgba(0,0,0,.4), 0 0 1px rgba(0,0,0,.7) inset, 0 10px 0px rgba(255,255,255,.11) inset; -webkit-background-clip: padding-box;font:bold 12px/15px "Helvetica Neue", sans-serif; 
+	color: #800000;text-decoration: none;text-shadow: 0 -1px 0 rgba(0,0,0,.6);z-index: 1;
+}
+.badge49{
+	position: absolute;top: 2px;left: 55px;padding: 2px 5px 0px 5px;border-radius:100px;
+	background: -webkit-linear-gradient(top, #fdfdd9 0%,#fdfdd9 100%);
+	box-shadow: 0 1px 2px rgba(0,0,0,.5), 0 1px 4px rgba(0,0,0,.4), 0 0 1px rgba(0,0,0,.7) inset, 0 10px 0px rgba(255,255,255,.11) inset; -webkit-background-clip: padding-box;font:bold 12px/15px "Helvetica Neue", sans-serif; 
+	color: #800000;text-decoration: none;text-shadow: 0 -1px 0 rgba(0,0,0,.6);z-index: 1;
+}
+.badge50{
+	position: absolute;top: 2px;left: 55px;padding: 2px 5px 0px 5px;border-radius:100px;
+	background: -webkit-linear-gradient(top, #fdfdd9 0%,#fdfdd9 100%);
+	box-shadow: 0 1px 2px rgba(0,0,0,.5), 0 1px 4px rgba(0,0,0,.4), 0 0 1px rgba(0,0,0,.7) inset, 0 10px 0px rgba(255,255,255,.11) inset; -webkit-background-clip: padding-box;font:bold 12px/15px "Helvetica Neue", sans-serif; 
+	color: #800000;text-decoration: none;text-shadow: 0 -1px 0 rgba(0,0,0,.6);z-index: 1;
+}
+.badge51{
+	position: absolute;top: 2px;left: 55px;padding: 2px 5px 0px 5px;border-radius:100px;
+	background: -webkit-linear-gradient(top, #fdfdd9 0%,#fdfdd9 100%);
+	box-shadow: 0 1px 2px rgba(0,0,0,.5), 0 1px 4px rgba(0,0,0,.4), 0 0 1px rgba(0,0,0,.7) inset, 0 10px 0px rgba(255,255,255,.11) inset; -webkit-background-clip: padding-box;font:bold 12px/15px "Helvetica Neue", sans-serif; 
+	color: #800000;text-decoration: none;text-shadow: 0 -1px 0 rgba(0,0,0,.6);z-index: 1;
+}
+.badge52{
+	position: absolute;top: 2px;left: 55px;padding: 2px 5px 0px 5px;border-radius:100px;
+	background: -webkit-linear-gradient(top, #fdfdd9 0%,#fdfdd9 100%);
+	box-shadow: 0 1px 2px rgba(0,0,0,.5), 0 1px 4px rgba(0,0,0,.4), 0 0 1px rgba(0,0,0,.7) inset, 0 10px 0px rgba(255,255,255,.11) inset; -webkit-background-clip: padding-box;font:bold 12px/15px "Helvetica Neue", sans-serif; 
+	color: #800000;text-decoration: none;text-shadow: 0 -1px 0 rgba(0,0,0,.6);z-index: 1;
+}

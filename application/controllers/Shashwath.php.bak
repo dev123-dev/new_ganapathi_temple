@@ -1,0 +1,678 @@
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+class Shashwath extends CI_Controller {
+	function __construct()
+	{
+		parent::__construct();
+		$this->load->helper('string');
+		$this->load->library('form_validation');
+		$this->load->library('session');
+		$this->load->model('Shashwath_Model','obj_shashwath',true);
+		$this->load->helper(array('form', 'url'));
+		$this->load->helper('date');
+		if(!isset($_SESSION['userId']))
+		redirect('login');
+		if($_SESSION['trustLogin'] == 1)
+		redirect('Trust');
+	}
+	
+	public function index($start=0){
+		$data['whichTab'] = 'shashwath';
+		$this->load->library('pagination');
+		if(isset($_SESSION['generateDate'])){
+			$date = $_SESSION['generateDate'];
+			$data['date'] = $date;
+			$this->session->unset_userdata('generateDate');
+		} else if(isset($_POST['date'])){
+			$date = @$_POST['date'];
+			$_SESSION['postdate'] = $date;
+			$data['date'] = $date;
+		} else if(isset($_SESSION['postdate'])){
+			echo '<br/>';
+			$date = $_SESSION['postdate'];
+			$data['date'] = $date;
+		}  else {
+			$date = date('d-m-Y');
+			$data['date'] = $date;
+		}
+		
+			$data['whichTab'] = 'shashwath';
+			unset($_SESSION['name_phone']);
+			$name_phone = '';
+			$data['count_result']= $this->obj_shashwath->count_result($date);
+			$data['date'] = $notifyDate = $date;
+			if($data['count_result']){
+				$data['shashwath_Sevas'] = $this->obj_shashwath->getExistingSevas($date,10,$start,$name_phone); 
+				$data['total_countSeva'] = $config['total_rows'] = $this->obj_shashwath->getExistingSevasCount($date,$name_phone)? $this->obj_shashwath->getExistingSevasCount($date,$name_phone) : 0;
+			} else {
+					$data['calendarCheck'] = $this->obj_shashwath->getThithiCode($date);
+					$thithi_codes = $this->obj_shashwath->getThithiCode($date);
+					$thithi_where_condition = '';
+				foreach($thithi_codes as $result){
+					$thithi_where_condition .= "THITHI_CODE = '".$result->THITHI_SHORT_CODE."' OR ";  
+					$ROI = $result->CAL_ROI;
+				}   $date2 = explode("-",$date);
+					$date = $date2[0].'-'.$date2[1];
+					$thithi_where_condition .= "ENG_DATE = '".$date."'"; 
+				if(isset($ROI)){
+					$data['shashwath_Sevas'] = $this->obj_shashwath->getShashwathSevas($date,$thithi_where_condition,$ROI,10,$start,$name_phone);
+					 $data['total_countSeva'] = $countGenerate = $config['total_rows'] = $this->obj_shashwath->getShashwathSevasCount($date,$thithi_where_condition,$ROI,$name_phone) ? $this->obj_shashwath->getShashwathSevasCount($date,$thithi_where_condition,$ROI,$name_phone) : 0;
+				}  		
+			}
+			
+					$config['base_url'] = base_url().'Shashwath/index';
+					$config['per_page'] = 10;
+					$config['prev_link'] = '&lt;&lt;';
+					$config['next_link'] = '&gt;&gt;';
+					$config['first_tag_open'] = '<li>';
+					$config['first_tag_close'] = '</li>';
+					$config['last_tag_open'] = '<li>';
+					$config['last_tag_close'] = '</li>';
+					$config['next_tag_open'] = '<li>';
+					$config['next_tag_close'] = '</li>';
+					$config['prev_tag_open'] = '<li>';
+					$config['prev_tag_close'] = '</li>';
+					$config['cur_tag_open'] = '<li class="active"><a>';
+					$config['cur_tag_close'] = '</a></li>';
+					$config['num_tag_open'] = '<li>';
+					$config['num_tag_close'] = '</li>';
+					$config['last_link'] = 'Last';
+					$config['first_link'] = 'First';
+					$this->pagination->initialize($config);
+					$data['pages'] = $this->pagination->create_links();
+					
+		$this->load->view('header',$data);
+		$this->load->view('Shashwath/shashwathSeva');
+		$this->load->view('footer_home');
+	}
+	
+	public function searchShashwathSeva($start=0){
+		$data['whichTab'] = 'shashwath';
+		$this->load->library('pagination');
+		if(isset($_SESSION['date1'])){
+			$date = $_SESSION['date1'];
+			$this->session->unset_userdata('date');
+		}  else if(isset($_POST['date'])){
+			$date = $_POST['date'];
+		} else if($start != 0){
+			$date = $_SESSION['pageDate'];
+			$this->session->unset_userdata('pageDate');
+		} else {
+			$date = date('d-m-Y');
+		}
+		
+		if(isset($_POST['name_phone'])){
+			$_SESSION['name_phone'] = $this->input->post('name_phone');
+			$name_phone = $this->input->post('name_phone');
+			$data['name_phone'] = $name_phone;   
+		} else if(isset($_SESSION['name_phone'])) {
+			$name_phone = $_SESSION['name_phone'];
+			$data['name_phone'] = $name_phone;
+		} else {
+			$name_phone = '';
+		}
+
+		$data['count_result']= $this->obj_shashwath->count_result($date);
+		$data['date'] = $notifyDate = $date;
+		if($data['count_result']){
+			$data['shashwath_Sevas'] = $this->obj_shashwath->getExistingSevas($date,10,$start,$name_phone); 
+			$data['total_countSeva'] = $config['total_rows'] = $this->obj_shashwath->getExistingSevasCount($date,$name_phone)? $this->obj_shashwath->getExistingSevasCount($date,$name_phone) : 0;
+		} else {
+				$data['calendarCheck'] = $this->obj_shashwath->getThithiCode($date);
+				$thithi_codes = $this->obj_shashwath->getThithiCode($date);
+				$thithi_where_condition = '';
+				//print_r($thithi_codes);
+			foreach($thithi_codes as $result){
+				$thithi_where_condition .= "THITHI_CODE = '".$result->THITHI_SHORT_CODE."' OR ";  
+				$ROI = $result->CAL_ROI;
+			} 	$date2 = explode("-",$date);
+				$date = $date2[0].'-'.$date2[1];
+				$thithi_where_condition .= "ENG_DATE = '".$date."'"; 
+			if(isset($ROI)){
+				$data['shashwath_Sevas'] = $this->obj_shashwath->getShashwathSevas($date,$thithi_where_condition,$ROI,10,$start,$name_phone);
+				 $data['total_countSeva'] = $countGenerate = $config['total_rows'] = $this->obj_shashwath->getShashwathSevasCount($date,$thithi_where_condition,$ROI,$name_phone) ? $this->obj_shashwath->getShashwathSevasCount($date,$thithi_where_condition,$ROI,$name_phone) : 0;
+				// $_SESSION['countGenerateSeva'] = $countGenerate;
+			} else {
+				// $_SESSION['countGenerateSeva'] = 0;
+			} 
+		}
+		
+		// print_r($data['shashwath_Sevas']);		
+		$resut1 = $this->obj_shashwath->getExistingSevasCount($date,$name_phone);
+		$config['base_url'] = base_url().'Shashwath/searchShashwathSeva';
+		$config['per_page'] = 10;
+		$config['prev_link'] = '&lt;&lt;';
+		$config['next_link'] = '&gt;&gt;';
+		$config['first_tag_open'] = '<li>';
+		$config['first_tag_close'] = '</li>';
+		$config['last_tag_open'] = '<li>';
+		$config['last_tag_close'] = '</li>';
+		$config['next_tag_open'] = '<li>';
+		$config['next_tag_close'] = '</li>';
+		$config['prev_tag_open'] = '<li>';
+		$config['prev_tag_close'] = '</li>';
+		$config['cur_tag_open'] = '<li class="active"><a>';
+		$config['cur_tag_close'] = '</a></li>';
+		$config['num_tag_open'] = '<li>';
+		$config['num_tag_close'] = '</li>';
+		$config['last_link'] = 'Last';
+		$config['first_link'] = 'First';
+		$this->pagination->initialize($config);
+		$data['pages'] = $this->pagination->create_links();
+		$this->load->view('header',$data);
+		$this->load->view('Shashwath/shashwathSeva');
+		$this->load->view('footer_home');
+	}
+
+	public function priceAdd(){
+		$data = $this->input->post('indexVal');
+		$memberData = $this->obj_shashwath->priceAdd($data);
+		print_r($memberData[0]->SM_NAME.'/'.$memberData[0]->SO_SEVA_NAME.'/'.$memberData[0]->SO_ID);
+	
+	}
+	public function priceSubmit(){
+		if(isset($_POST['selectedDate'])){
+			$date = $_POST['selectedDate'];
+		}
+		$soId = $this->input->post('id');
+		$price = $this->input->post('price');
+		$this->obj_shashwath->priceSubmit($price,$soId); 
+		$_SESSION['date1'] = $date;
+		if(isset($_POST['fromAddSevaPrice'])){
+			redirect('Shashwath/addSevaPrice');
+		} else {
+			redirect('Shashwath/index');
+		}
+			
+	}
+	public function addSevaPrice($start=0){
+		$date = date('d-m-Y');
+		$data['date'] = $date;
+		$result = $this->obj_shashwath->seva_Offered_No_Price_Count($date);
+		$_SESSION['sevaOfferedNoPriceCount'] = $result;
+		//$data['shashwath_Sevas'] = $this->obj_shashwath->addSevaPrice($date); 
+		$this->load->library('pagination');
+		$data['shashwath_Sevas'] = $this->obj_shashwath->addSevaPrice($date,10,$start); 
+		$config['base_url'] = base_url().'Shashwath/addSevaPrice';
+		$config['total_rows'] = $this->obj_shashwath->seva_Offered_No_Price_Count($date);
+		$config['per_page'] = 10;
+		$config['prev_link'] = '&lt;&lt;';
+		$config['next_link'] = '&gt;&gt;';
+		$config['first_tag_open'] = '<li>';
+		$config['first_tag_close'] = '</li>';
+		$config['last_tag_open'] = '<li>';
+		$config['last_tag_close'] = '</li>';
+		$config['next_tag_open'] = '<li>';
+		$config['next_tag_close'] = '</li>';
+		$config['prev_tag_open'] = '<li>';
+		$config['prev_tag_close'] = '</li>';
+		$config['cur_tag_open'] = '<li class="active"><a>';
+		$config['cur_tag_close'] = '</a></li>';
+		$config['num_tag_open'] = '<li>';
+		$config['num_tag_close'] = '</li>';
+		$config['last_link'] = 'Last';
+		$config['first_link'] = 'First';
+		$this->pagination->initialize($config);
+		$data['pages'] = $this->pagination->create_links();
+		$this->load->view('header',$data);           
+		$this->load->view('Shashwath/addSevaPrice');
+		$this->load->view('footer_home');
+	}
+	
+	public function generateSeva(){
+        if(isset($_POST['generateDate'])){
+			$date = $_POST['generateDate'];
+			$dateMonth = explode('-',$date);
+			$searchDate = $dateMonth[0].'-'.$dateMonth[1];
+		}		
+		$data = $this->obj_shashwath->getThithiCode($date);
+		$thithi_where_condition = '';
+			foreach($data as $result){
+				$thithi_where_condition .= "THITHI_CODE = '".$result->THITHI_SHORT_CODE."' OR ";  
+				$ROI = $result->CAL_ROI;
+			}
+				
+		$thithi_where_condition .= "ENG_DATE = '".$searchDate."'"; 
+		$this->obj_shashwath->generateSeva($date,$thithi_where_condition,$ROI);
+		$_SESSION['generateDate'] = $date;
+		unset($_SESSION['blnShashwathSevaExists']);
+        redirect('Shashwath/index');		  
+	}
+	
+    public function shashwath_member($start=0)
+	{
+		$data['whichTab'] = 'shashwath';
+		unset($_SESSION['name_phone']);
+		$name_phone = '';
+		$data['ShashwathMemberCount'] = $this->obj_shashwath->count_rows_member();
+		//$data['records'] = $this->obj_shashwath->get_member_details();
+		$this->load->library('pagination');
+		$data['ShashwathMember'] = $this->obj_shashwath->get_member_details(10,$start,$name_phone);
+	//	$data['memberCount'] = $this->obj_shashwath->count_rows_member();
+		$config['base_url'] = base_url().'Shashwath/shashwath_member';
+		$config['total_rows']= $this->obj_shashwath->count_rows_member($name_phone);
+		$config['per_page'] = 10;
+		$config['prev_link'] = '&lt;&lt;';
+		$config['next_link'] = '&gt;&gt;';
+		$config['first_tag_open'] = '<li>';
+		$config['first_tag_close'] = '</li>';
+		$config['last_tag_open'] = '<li>';
+		$config['last_tag_close'] = '</li>';
+		$config['next_tag_open'] = '<li>';
+		$config['next_tag_close'] = '</li>';
+		$config['prev_tag_open'] = '<li>';
+		$config['prev_tag_close'] = '</li>';
+		$config['cur_tag_open'] = '<li class="active"><a>';
+		$config['cur_tag_close'] = '</a></li>';
+		$config['num_tag_open'] = '<li>';
+		$config['num_tag_close'] = '</li>';
+		$config['last_link'] = 'Last';
+		$config['first_link'] = 'First';
+		$this->pagination->initialize($config);
+		$data['pages'] = $this->pagination->create_links();
+		$this->load->view('header',$data);           
+		$this->load->view('Shashwath/memberDetails');
+		$this->load->view('footer_home');
+	}
+	
+	public function search_shashwath_member($start=0)
+	{
+		$data['whichTab'] = 'shashwath';
+		if(isset($_POST['name_phone'])){
+			$_SESSION['name_phone'] = $this->input->post('name_phone');
+			$name_phone = $this->input->post('name_phone');
+			$data['name_phone'] = $name_phone;   
+		} else if(isset($_SESSION['name_phone'])) {
+			$name_phone = $_SESSION['name_phone'];
+			$data['name_phone'] = $name_phone;
+		} else {
+			$name_phone = '';
+		}
+		$data['ShashwathMemberCount'] = $this->obj_shashwath->count_rows_member($name_phone);
+		//$data['records'] = $this->obj_shashwath->get_member_details();
+		$this->load->library('pagination');
+		$data['ShashwathMember'] = $this->obj_shashwath->get_member_details(10,$start,$name_phone);
+		//$data['memberCount'] = $this->obj_shashwath->count_rows_member();
+		$config['base_url'] = base_url().'Shashwath/search_shashwath_member';
+		$config['total_rows']= $this->obj_shashwath->count_rows_member($name_phone);
+		$config['per_page'] = 10;
+		$config['prev_link'] = '&lt;&lt;';
+		$config['next_link'] = '&gt;&gt;';
+		$config['first_tag_open'] = '<li>';
+		$config['first_tag_close'] = '</li>';
+		$config['last_tag_open'] = '<li>';
+		$config['last_tag_close'] = '</li>';
+		$config['next_tag_open'] = '<li>';
+		$config['next_tag_close'] = '</li>';
+		$config['prev_tag_open'] = '<li>';
+		$config['prev_tag_close'] = '</li>';
+		$config['cur_tag_open'] = '<li class="active"><a>';
+		$config['cur_tag_close'] = '</a></li>';
+		$config['num_tag_open'] = '<li>';
+		$config['num_tag_close'] = '</li>';
+		$config['last_link'] = 'Last';
+		$config['first_link'] = 'First';
+		$this->pagination->initialize($config);
+		$data['pages'] = $this->pagination->create_links();
+		
+		$this->load->view('header',$data);           
+		$this->load->view('Shashwath/memberDetails');
+		$this->load->view('footer_home');
+	}
+	
+	public function member_seva_details()
+	{
+		$data['whichTab'] = 'shashwath';
+		$this->load->view('header',$data);
+		$this->load->view('Shashwath/memberSevaDetails');
+		$this->load->view('footer_home');
+	}
+	
+	function addMember() {
+		//$bomid = $this->input->post('bm');
+		$data1['whichTab'] = 'shashwath';
+		$data1['deity'] = $this->obj_shashwath->getDeties();
+		$data1['sevas'] = json_encode($this->obj_shashwath->getDetiesSevas());
+		//$data1['thithi'] =  $this->obj_shashwath->getThithi($bomid);
+		$data1['thithi_shudda'] =  $this->obj_shashwath->getThithi(1);
+		$data1['thithi_bahula'] =  $this->obj_shashwath->getThithi(2);
+		$data1['masa'] =  $this->obj_shashwath->getMasa();
+		$data1['moon'] =  $this->obj_shashwath->getBasedOnMoon();
+		$data1['period'] = $this->obj_shashwath->getPeriod();
+		if(isset($_SESSION['Deity_Seva'])) {
+			$this->load->view('header', $data1);
+			$this->load->view('Shashwath/shashwathMember');
+			$this->load->view('footer_home');
+		} else {
+			redirect('Home/homePage');
+		}
+		//print_r($data);
+	}
+	
+	/*function thithiCode_Date(){
+	$data = $this -> input -> post('date');
+	$thithicode = $this -> input -> post('thithicode');
+		if($data){
+			$thithidata = $this -> obj_shashwath -> getThithiCode($data);
+			print_r($thithidata[0]->THITHI_SHORT_CODE);
+		} else if($thithicode){
+			$thithicodedata = $this -> obj_shashwath -> getThithiDate($thithicode);
+			print_r($thithicodedata[0]->ENG_DATE);
+		}
+	}*/
+	
+	
+	/* function shashwath_deity() {
+		
+		$data['whichTab'] = "shashwath";
+		$data['deity'] = $this->obj_shashwath->getDeties();
+		$data['sevas'] = json_encode($this->obj_shashwath->getDetiesSevas());
+
+		if(isset($_SESSION['Deity_Seva'])) {
+			$this->load->view('header', $data);
+			$this->load->view('shashwathMember');
+			$this->load->view('footer_home');
+		} else {
+			redirect('Home/homePage');
+		}
+	}
+	
+	$data1['whichTab'] = 'shashwath';
+		$data1['deity'] = $this->obj_shashwath->getDeties();
+		$data1['sevas'] = json_encode($this->obj_shashwath->getDetiesSevas());
+		//$data1['thithi'] =  $this->obj_shashwath->getThithi($bomid);
+		$data1['thithi_shudda'] =  $this->obj_shashwath->getThithi(1);
+		$data1['thithi_bahula'] =  $this->obj_shashwath->getThithi(2);
+		$data1['masa'] =  $this->obj_shashwath->getMasa();
+		$data1['moon'] =  $this->obj_shashwath->getBasedOnMoon();
+		$data1['period'] = $this->obj_shashwath->getPeriod();
+		if(isset($_SESSION['Deity_Seva'])) {
+			$this->load->view('header', $data1);
+			$this->load->view('Shashwath/shashwathMember');
+			$this->load->view('footer_home');
+		} else {
+			redirect('Home/homePage');
+		}
+	*/
+	
+	public function edit_shashwath_member()
+	{
+		$data['whichTab'] = 'shashwath';
+		$data['deity'] = $this->obj_shashwath->getDeties();
+		$data['sevas'] = json_encode($this->obj_shashwath->getDetiesSevas());
+		//$data['thithi'] =  $this->obj_shashwath->getThithi1();
+		$data['thithi_shudda'] =  $this->obj_shashwath->getThithi(1);
+		$data['thithi_bahula'] =  $this->obj_shashwath->getThithi(2); 
+		$data['masa'] =  $this->obj_shashwath->getMasa();
+		$data['moon'] =  $this->obj_shashwath->getBasedOnMoon();
+		$data['period'] = $this->obj_shashwath->getPeriod();
+		//$data1 = $_SESSION['memberId'];
+		$data1 = $this->input->post('memberId');
+		//$_SESSION['id'] = $data1;
+		$data['members'] = $this->obj_shashwath->member_details($data1);
+		//print_r($data1);
+		if(isset($_SESSION['Deity_Seva'])) {
+			$this->load->view('header', $data);
+			$this->load->view('Shashwath/editShashwathDetails');
+			$this->load->view('footer_home');
+		} else {
+			redirect('Home/homePage');
+		}
+		//print_r($data);
+				/* $data1['id'] = $this->input->post('id');
+		print_r ($data1); */
+		
+	}
+	
+	/*function update_member() 
+	{
+		$data['whichTab'] = 'shashwath';
+		$data['deity'] = $this->obj_shashwath->getDeties();
+		$data['sevas'] = json_encode($this->obj_shashwath->getDetiesSevas());
+		$data['thithi'] =  $this->obj_shashwath->getThithi();
+		$data['masa'] =  $this->obj_shashwath->getMasa();
+		$data['moon'] =  $this->obj_shashwath->getBasedOnMoon();
+		$data['period'] = $this->obj_shashwath->getPeriod();
+		$data1 = $this->input->post('identity');
+		$data['update'] = $this->obj_shashwath->update_details($data1);
+		
+		//print_r($data1);
+		if(isset($_SESSION['Deity_Seva'])) {
+			$this->load->view('header', $data);
+			$this->load->view('Shashwath/memberDetails');
+			$this->load->view('footer_home');
+		} else {
+			redirect('Home/homePage');
+		}
+	} */
+	
+	
+	public function lossReport($start = 0){
+		$data['whichTab'] = 'shashwath';
+		if(isset($_POST['date'])){
+			$date = $_POST['date'];
+		} else if($start != 0){
+			$date = $_SESSION['losspageDate'];
+			$this->session->unset_userdata('losspageDate');
+		} else {
+			$date = date('d-m-Y');
+		}
+		
+		$data['whichTab'] = 'shashwath';
+		unset($_SESSION['name_phone']);
+		$name_phone = '';
+
+		$countLossSeva = $this->obj_shashwath->count_LossReport_Rows($date,$name_phone);
+		$data['date'] = $date;
+		$this->load->library('pagination');
+		$data['mainLoss'] = $this->obj_shashwath->getMainLoss($date,10,$start,$name_phone);
+		$data['TotalAccumulatedLoss'] = $this->obj_shashwath->getTotalAccumulatedLoss($date,$name_phone);
+		$config['base_url'] = base_url().'Shashwath/lossReport';
+		$config['total_rows'] = $this->obj_shashwath->count_LossReport_Rows($date,$name_phone);
+		$config['per_page'] = 10;
+		$config['prev_link'] = '&lt;&lt;';
+		$config['next_link'] = '&gt;&gt;';
+		$config['first_tag_open'] = '<li>';
+		$config['first_tag_close'] = '</li>';
+		$config['last_tag_open'] = '<li>';
+		$config['last_tag_close'] = '</li>';
+		$config['next_tag_open'] = '<li>';
+		$config['next_tag_close'] = '</li>';
+		$config['prev_tag_open'] = '<li>';
+		$config['prev_tag_close'] = '</li>';
+		$config['cur_tag_open'] = '<li class="active"><a>';
+		$config['cur_tag_close'] = '</a></li>';
+		$config['num_tag_open'] = '<li>';
+		$config['num_tag_close'] = '</li>';
+		$config['last_link'] = 'Last';
+		$config['first_link'] = 'First';
+		$this->pagination->initialize($config);
+		$data['pages'] = $this->pagination->create_links();
+		//print_r($data['mainLoss']);
+		$this->load->view('header',$data);
+		$this->load->view('Shashwath/Loss_report');
+		$this->load->view('footer_home');
+	}
+	
+	public function search_lossReport($start = 0){
+		$data['whichTab'] = 'shashwath';
+		if(isset($_POST['date'])){
+			$date = $_POST['date'];
+		} else if($start != 0){
+			$date = $_SESSION['losspageDate'];
+			$this->session->unset_userdata('losspageDate');
+		} else {
+			$date = date('d-m-Y');
+		} 
+		
+		if(isset($_POST['name_phone'])){
+			$_SESSION['name_phone'] = $this->input->post('name_phone');
+			$name_phone = $this->input->post('name_phone');
+			$data['name_phone'] = $name_phone;   
+		} else if(isset($_SESSION['name_phone'])) {
+			$name_phone = $_SESSION['name_phone'];
+			$data['name_phone'] = $name_phone;
+		} else {
+			$name_phone = '';
+		} 
+		
+		//$countLossSeva = $this->obj_shashwath->count_LossReport_Rows($date,$name_phone);
+		//print_r($countLossSeva);
+		//$_SESSION['countLossSeva'] = $countLossSeva;
+		$data['date'] = $date;
+		$this->load->library('pagination');
+		$data['mainLoss'] = $this->obj_shashwath->getMainLoss($date,10,$start,$name_phone);
+		$config['base_url'] = base_url().'Shashwath/search_lossReport';
+		$data['TotalAccumulatedLoss'] = $this->obj_shashwath->getTotalAccumulatedLoss($date,$name_phone);
+		$config['total_rows']= $this->obj_shashwath->count_LossReport_Rows($date,$_SESSION['name_phone']);
+		$config['per_page'] = 10;
+		$config['prev_link'] = '&lt;&lt;';
+		$config['next_link'] = '&gt;&gt;';
+		$config['first_tag_open'] = '<li>';
+		$config['first_tag_close'] = '</li>';
+		$config['last_tag_open'] = '<li>';
+		$config['last_tag_close'] = '</li>';
+		$config['next_tag_open'] = '<li>';
+		$config['next_tag_close'] = '</li>';
+		$config['prev_tag_open'] = '<li>';
+		$config['prev_tag_close'] = '</li>';
+		$config['cur_tag_open'] = '<li class="active"><a>';
+		$config['cur_tag_close'] = '</a></li>';
+		$config['num_tag_open'] = '<li>';
+		$config['num_tag_close'] = '</li>';
+		$config['last_link'] = 'Last';
+		$config['first_link'] = 'First';
+		$this->pagination->initialize($config);
+		$data['pages'] = $this->pagination->create_links();
+		//print_r($data['mainLoss']);
+		$this->load->view('header',$data);
+		$this->load->view('Shashwath/Loss_report');
+		$this->load->view('footer_home');
+	}
+	
+	function lossDetail($start = 0) {
+		$data['whichTab'] = 'shashwath';
+		if(isset($_POST['searchDate'])){
+		//$total = $_POST['total'];
+		$date = @$_POST['searchDate'];
+		$ssId = @$_POST['ssVal'];
+		$soId = @$_POST['soVal'];
+		//$_SESSION['total']	= $total;	
+		$_SESSION['searchDate']	= $date;	
+        $_SESSION['ssVal']	= $ssId;
+		}
+		//$data['total']  = $_SESSION['total'];
+		$date = $_SESSION['searchDate'];
+		$ssId = $_SESSION['ssVal'];
+		$this->load->library('pagination');
+		$data['lossDetail'] = $this->obj_shashwath->getDetailedLoss($date,$ssId,10,$start,$soId);
+		$config['base_url'] = base_url().'Shashwath/lossDetail';
+		$config['total_rows']= $this->obj_shashwath->getDetailedLoss_Rows($date,$ssId);
+		$config['per_page'] = 10;
+		$config['prev_link'] = '&lt;&lt;';
+		$config['next_link'] = '&gt;&gt;';
+		$config['first_tag_open'] = '<li>';
+		$config['first_tag_close'] = '</li>';
+		$config['last_tag_open'] = '<li>';
+		$config['last_tag_close'] = '</li>';
+		$config['next_tag_open'] = '<li>';
+		$config['next_tag_close'] = '</li>';
+		$config['prev_tag_open'] = '<li>';
+		$config['prev_tag_close'] = '</li>';
+		$config['cur_tag_open'] = '<li class="active"><a>';
+		$config['cur_tag_close'] = '</a></li>';
+		$config['num_tag_open'] = '<li>';
+		$config['num_tag_close'] = '</li>';
+		$config['last_link'] = 'Last';
+		$config['first_link'] = 'First';
+		$this->pagination->initialize($config);
+		$data['pages'] = $this->pagination->create_links();
+		$this->load->view('header',$data);
+		$this->load->view('Shashwath/LossDetail');
+		$this->load->view('footer_home');
+	}
+	
+	//Settings Part
+	function add_period_details(){
+		$periodName = $this->input->post('pname');
+		$period = $this->input->post('period');
+		$periodStatus = $this->input->post('pstatus');
+		$data = array( 
+		'PERIOD_NAME' => $periodName,
+		'PERIOD' => $period,
+		'P_STATUS' => $periodStatus
+		);
+		$this->obj_shashwath->addPeriodDetails($data);
+		redirect('admin_settings/Admin_setting/period_setting');
+	}
+
+	
+	//Settings Part
+	function update_period_details(){
+		$shashwathPeriodId = $this->input->post('sPid');
+		$shashwathPeriodName = $this->input->post('periodN');
+		$shashwathPeriod = $this->input->post('period');
+		$shashwathPeriodStatus = $this->input->post('pStatus');
+		$data = array(
+		'SP_ID' => $shashwathPeriodId,
+		'PERIOD_NAME' => $shashwathPeriodName,
+		'PERIOD' => $shashwathPeriod,
+		'P_STATUS' => $shashwathPeriodStatus
+		);
+		$this->obj_shashwath->updatePeriodDetails($data,$shashwathPeriodId);
+		redirect('admin_settings/Admin_setting/period_setting');
+	}
+	
+	function editCalendar(){
+		if(isset($_POST)){
+			$data['calId'] = $this->input->post('calId');
+			$data['calStartDate'] = $this->input->post('calstDate');
+			$data['calEndDate'] = $this->input->post('calEndDate');
+			$data['calRoi'] = $this->input->post('calRoi');
+			//print_r($_POST);
+		}
+		$this->load->view('header',$data);
+		$this->load->view('admin_settings/edit_calendar');
+		$this->load->view('footer_home');	
+	}
+	
+	function update_Calendar_details() {
+		$calId = $this->input->post('calendarId');
+		$calStartDate = $this->input->post('calendarStartDate');
+		$calEndDate = $this->input->post('calendarEndDate');
+		$calRoi = $this->input->post('rateOfInterest');
+		//print_r($_POST);
+		$data = array(
+			'CAL_START_DATE' => $calStartDate ,
+			'CAL_END_DATE' => $calEndDate,
+			'CAL_ROI' => $calRoi
+		);
+		$this->obj_shashwath->updateCalendarDetails($data,$calId);
+		redirect('admin_settings/Admin_setting/calendar_display');
+	}
+	
+	 function updateMember() {
+		$id = $this->input->post('id');
+		$data1 = array (
+					
+						'SM_NAME' => $this->input->post('name'),
+						'SM_PHONE' => $this->input->post('number'),
+						'SM_RASHI' => $this->input->post('rashi'),
+						'SM_NAKSHATRA' => $this->input->post('nakshatra'),
+						'SM_ADDR1' => $this->input->post('addrline1'),
+						'SM_ADDR2' => $this->input->post('addrline2'),
+						'SM_CITY' => $this->input->post('smcity'),
+						'SM_STATE' => $this->input->post('smstate'),
+						'SM_COUNTRY' => $this->input->post('smcountry'),
+						'SM_PIN' => $this->input->post('smpin'),
+						'REMARKS' => $this->input->post('smremarks') 
+						);
+		//print_r($data1);
+		$this->db->where('SM_ID',$id);
+		$this->db->update('shashwath_members',$data1);
+		/*$this->load->view('header',$data1);
+		$this->load->view('Shashwath/memberDetails');
+		$this->load->view('footer_home');*/
+	} 
+
+}

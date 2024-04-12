@@ -1,0 +1,100 @@
+	body {
+		min-height:75%;
+		min-width:100%;
+		margin: 0;
+		padding:0;
+		font-family: 'Quicksand', sans-serif !important;
+		width:76mm;
+		margin-left:12px;
+			
+	}
+	
+	.eventsFont2 {
+		font-weight: 500;
+		font-size: 20px;
+	}
+	
+	page {
+	   width:76mm;
+	  display: block;
+		margin:0;
+		padding:0;
+		margin-bottom:5px;
+		 margin-left:12px;
+		 page-break-before: always;
+		 page-break-after: avoid;
+	}
+	
+	@font-face {
+    font-family: samark;
+    src: url(../css/fonts/Nunito-Regular.ttf);
+	}
+	
+	
+	.samFont {
+		font-family:samark;
+	}
+	
+	.samFont1 {
+		font-family:samark;
+		font-size:35px !important;
+	}
+
+	.samFont2 {
+		font-family:samark;
+		font-size:27px !important;
+	}
+
+	input {
+		font-weight: 700;
+	}
+
+@media print {
+	body,html {
+		  width:76mm;
+		 display: block;
+		  padding:0;
+		margin:0;
+		  margin-left:12px;
+	}
+	
+	page {
+	   width:76mm;
+	  display: block;
+	  padding:0;
+		margin:0;
+		margin-left:12px;
+	   page-break-before: always;
+		 page-break-after: avoid;
+	}
+	
+	body {
+		  width:76mm;
+		display: block;
+		box-shadow: 0;
+		margin:0;
+		 padding:0;
+		   margin-left:12px;
+		
+	}
+	
+	@page {
+		  width:76mm;
+		clear:both;
+		margin:0;
+		display: block;
+		padding:0;
+		 margin-left:12px;
+		
+	}
+}
+
+	/*@font-face {
+		font-family:switzerland;
+		src:url(../css/fonts/switzb.ttf);
+	}*/
+	.print {
+		 page-break-before: always !important;
+		 page-break-after: always !important;
+		 margin-bottom:0px;
+	}

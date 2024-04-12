@@ -1,0 +1,71 @@
+<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+	<img style="width:20px; height:20px;" title="delete" src="<?=site_url(); ?>images/delete1.svg">
+</div>
+<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+	<div class="form-inline">
+		<label for="name">Amount
+			<span style="color:#800000;">*</span>
+		</label>
+		<input style="width:75px;" type="text" class="form-control form_contct2" id="advAmt" placeholder="" name="advAmt">
+	</div>
+</div>
+<div class="form-inline col-lg-9 col-md-9 col-sm-9 col-xs-9">
+	<div class="form-group">
+		<label for="modeOfPayment">Mode Of Payment:
+			<span style="color:#800000;">*</span>
+		</label>
+		<select id="modeOfPayment" class="form-control">
+			<option value="">Select Payment Mode</option>
+			<option value="Cash">Cash</option>
+			<option value="Cheque">Cheque</option>
+			<option value="Direct Credit">Direct Credit</option>
+			<option value="Credit / Debit Card">Credit / Debit Card</option>
+		</select>
+	</div>
+
+	<div style="padding-top: 15px; display:none;margin-left: -14px;" id="showChequeList">
+		<div class="form-group col-xs-10">
+			<label for="name">Cheque No:
+				<span style="color:#800000;">*</span>
+			</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="text" class="form-control form_contct2" id="chequeNo" placeholder="" name="chequeNo">
+		</div>
+
+		<div style="padding-top: 15px;" class="form-group col-xs-10">
+			<label for="rashi">Cheque Date:
+				<span style="color:#800000;">*</span>
+			</label>&nbsp;&nbsp;
+			<div class="input-group input-group-sm">
+				<input id="chequeDate" type="text" value="<?=date(" d-m-Y ")?>" class="form-control chequeDate2 form_contct2" placeholder="dd-mm-yyyy">
+				<div class="input-group-btn">
+					<button class="btn btn-default chequeDate" type="button">
+						<i class="glyphicon glyphicon-calendar"></i>
+					</button>
+				</div>
+			</div>
+		</div>
+
+		<div style="padding-top: 15px;" class="form-group col-xs-12">
+			<label for="number">Bank Name:
+				<span style="color:#800000;">*</span>
+			</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="text" class="form-control form_contct2" id="bank" placeholder="" name="bank">
+		</div>
+
+		<div style="padding-top: 15px;" class="form-group col-xs-12">
+			<label for="nakshatra">Branch Name:
+				<span style="color:#800000;">*</span>
+			</label>&nbsp;&nbsp;
+			<input type="text" class="form-control form_contct2" id="branch" placeholder="" name="branch">
+		</div>
+	</div>
+
+	<div style="padding-top: 15px; display:none;margin-left: -14px;" id="showDebitCredit">
+		<div class="form-group col-xs-10">
+			<label for="name">Transaction Id:
+				<span style="color:#800000;">*</span>
+			</label>&nbsp;&nbsp;
+			<input type="text" class="form-control form_contct2" id="transactionId" placeholder="" name="transactionId">
+		</div>
+	</div>
+</div>
