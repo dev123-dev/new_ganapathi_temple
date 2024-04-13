@@ -66,11 +66,93 @@
 				</div>
 			</div>
 		</div>
-		<!--5555--><!--Mode Of Payment, Cheque No, Cheque Date, Bank and Branch and Payment Notes-->
-				<div class="row form-group">
-				<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12" style="margin-bottom: 1.5em;margin-top:0.7em;">
+		
+		<div class="row">
+			<div class="col-md-6 text-left">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-bottom: 1.5em;">
 					<div class="form-inline">
-					  <label for="modeOfPayment">Mode Of Payment <span style="color:#800000;padding-right:5px;">*</span></label>
+						<label for="name">Name <span style="color:#800000;">*</span></label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<input type="text" class="form-control form_contct2" id="name1" placeholder="Akash" name="name1" style="width: 70%;">
+					</div>
+				</div>
+				
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-bottom: 1.5em;">
+					<div class="form-inline">
+					  <label for="number">Number </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					  <input type="text" class="form-control form_contct2" id="number" placeholder="9876543210" name="number" style="width: 70%;">
+					</div>
+				</div>
+				
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-bottom: 1.5em;">
+					<div class="form-inline">
+					  <label for="number">Email </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					  <input type="text" class="form-control form_contct2" id="email" placeholder="akash.svrna@gmail.com" name="email" style="width: 70%;">
+					</div>
+				</div>
+
+				<!-- new code for adhaar and pan start by adithya -->
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-bottom: 1.5em;">
+					<div class="form-inline">
+					  <label for="pan">Pan No </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					  <input type="text" class="form-control form_contct2" id="pan" placeholder="AFHYT5678Y" name="pan" style="width: 70%;">
+					</div>
+				</div>
+				
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-bottom: 1.5em;">
+					<div class="form-inline">
+					  <label for="adhaar">Adhaar No </label>&nbsp;
+					  <input type="text" class="form-control form_contct2" id="adhaar" placeholder="987456321234" name="adhaar" style="width: 70%;">
+					</div>
+				</div>
+<!-- new code for adhaar and pan end by adithya -->
+
+
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-bottom: 1.5em;">
+					<div class="form-inline">
+						<!-- <label><input style="margin-right: 6px;" id="postage" name="postage" onClick="hidePostageAmt(this);" type="checkbox" value="1">Postage</label>
+						<input style="width:50%;visibility:hidden;" type="text" style="display:hidden;" value='0' class="form-control form_contct2" id="postageAmt" placeholder="Amount" name="postageAmt"/> -->
+					</div>
+				</div>
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+						<input type="text" class="form-control form_contct2" id="addLine1" placeholder="Address Line1" name="addLine1"><br>
+					</div>
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+						<input type="text" class="form-control form_contct2" id="addLine2" placeholder="Address Line2" name="addLine2"><br>
+					</div>
+					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+						<input type="text" class="form-control form_contct2" id="city" placeholder="City" name="city"><br>
+					</div>
+					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" style="padding-left:5px;padding-right:5px;">
+						<input type="text" class="form-control form_contct2" id="country" placeholder="Country" name="country"><br>
+					</div>
+					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+						<input type="text" class="form-control form_contct2" id="pincode" placeholder="Pincode" name="pincode"><br>
+					</div>
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="display:none;margin-bottom: 1.5em;">
+					<div class="form-inline">
+					  <label for="number">Address </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					  <textarea class="form-control" rows="5" id="address" style="resize:none;" name="address" placeholder="Near Classic Chaya, Santhakatte" style="width: 100%;"></textarea>
+					</div>
+				</div>
+			</div>
+			
+			
+			<div class="col-md-6 text-left">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-bottom: 1.5em;">
+					<!-- <label for="number">Event: </label>
+					<span class="eventsFont2 samFont"> <?=$event['TET_NAME']; ?></span> -->
+				</div>
+				
+				<div class="col-lg-12 col-md-12 col-sm-8 col-xs-12" style="margin-bottom: 1.5em;">
+					<div class="form-inline">
+					  <label for="number">Amount <span style="color:#800000;">*</span></label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					  <input type="text" class="form-control form_contct2" id="amount" placeholder="" name="amount" style="width: 40%;" onkeyup="checkPriceVal(event)">
+					</div>
+				</div>
+				
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-8" style="margin-bottom: 2em;">
+					<div class="form-inline">
+					  <label for="modeOfPayment">Mode Of Payment <span style="color:#800000;">*</span></label>
 					  <select id="modeOfPayment" name="modeOfPayment" class="form-control">
 						<option value="">Select Payment Mode</option>
 						<option value="Cash">Cash</option>
@@ -80,27 +162,20 @@
 					  </select>
 					</div>
 				</div>
-				<div class="col-lg-8 col-md-8 col-sm-12 col-xs-12" style="margin-top:0.7em;">
-						<div class="form-inline">
-						  <label for="number">Amount <span style="color:#800000;">*</span></label></label>
-						  <input type="text" class="form-control form_contct2" id="amount" placeholder="" name="amount" onkeyup="checkPriceVal(event)" autocomplete="off">
-						</div>
-				</div>
-				</div>
 				
 				<div style="display:none" id="showChequeList">
 					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-8" style="margin-bottom: 2em;">
 						<div class="form-inline">
-							<label for="name" style="margin-left:-15px;">Cheque No: </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<label for="name">Cheque No: <span style="color:#800000;">*</span></label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							<input type="text" class="form-control form_contct2" id="chequeNo" placeholder="" name="chequeNo">
 						</div>
 					</div>
 						
 					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-8" style="margin-bottom: 2em;">
 						<div class="form-inline">
-							<label for="rashi" style="margin-left:-15px;">Cheque Date: </label>&nbsp;&nbsp;
+							<label for="rashi">Cheque Date: <span style="color:#800000;">*</span></label>&nbsp;&nbsp;
 							<div class="input-group input-group-sm">
-								<input id="chequeDate" name="chequeDate" type="text" value="" class="form-control chequeDate2 form_contct2" placeholder="dd-mm-yyyy" readonly="readonly"/>
+								<input id="chequeDate" name="chequeDate" type="text" value="" class="form-control chequeDate2 form_contct2" placeholder="dd-mm-yyyy">
 								<div class="input-group-btn">
 								  <button class="btn btn-default chequeDate" type="button">
 									<i class="glyphicon glyphicon-calendar"></i>
@@ -112,20 +187,20 @@
 					
 					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-10" style="margin-bottom: 2em;">
 						<div class="form-inline">
-						  <label for="number" style="margin-left:-15px;">Bank Name: </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						  <input type="text" class="form-control form_contct2" style="margin-left:-2px;" id="bank" placeholder="" name="bank">
+						  <label for="number">Bank Name: <span style="color:#800000;">*</span></label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						  <input type="text" class="form-control form_contct2" id="bank" placeholder="" name="bank">
 						</div>
 					</div>
 					
 					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-10" style="margin-bottom: 2em;">
 						<div class="form-inline">
-						  <label for="nakshatra" style="margin-left:-15px;">Branch Name: </label>&nbsp;&nbsp;
-						  <input type="text" class="form-control form_contct2" style="margin-left:-2px;" id="branch" placeholder="" name="branch">
+						  <label for="nakshatra">Branch Name: <span style="color:#800000;">*</span></label>&nbsp;&nbsp;
+						  <input type="text" class="form-control form_contct2" id="branch" placeholder="" name="branch">
 						</div>
 					</div>
 				</div>
 				
-				<!-- Edited by adithya removed comment -->
+			<!-- ADDED BY ADITHYA ON 5-1-24 -->
 				<div style="display:none;" id="showDebitCredit">
 					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-10" style="margin-bottom: 2em;">
 						<div class="form-inline col-xs-12" style="margin-left: -14px;margin-bottom: 1em;">
@@ -140,14 +215,14 @@
 							</select>
 						</div>
 						<div class="form-inline">
-							<label for="name" style="margin-left: -1em;">Transaction Id: <span style="color:#800000;">*</span></label>&nbsp;&nbsp;
+							<label for="name">Transaction Id: <span style="color:#800000;">*</span></label>&nbsp;&nbsp;
 							<input type="text" class="form-control form_contct2" id="transactionId" placeholder="" name="transactionId">
 						</div>
 					</div>
 				</div>
-				<!-- Edited part end ..-->
+				<!-- ADDED BY ADITHYA ON 5-1-24 ..-->
 					<!-- SLAP -->
-				<!-- Edited by adithy removed comment -->
+				<!-- ADDED BY ADITHYA ON 5-1-24 -->
 				<div style="padding-top: 15px; display:none ;" id="showDirectCredit">
 					<div class="form-group col-xs-10">
 						<label for="bank">To Bank <span style="color:#800000;">*</span></label>&nbsp;&nbsp;
@@ -161,20 +236,21 @@
 					</select>
 					</div>
 				</div>
-				<!-- Edit part end -->
-				<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" style="margin-bottom: 1.5em;margin-left:-14px;">
+				<!-- ADDED BY ADITHYA ON 5-1-24.. -->
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-bottom: 1.5em;">
 					<div class="form-group">
 					  <label for="comment">Payment Notes:</label>
 					  <textarea class="form-control" rows="5" style="resize:none;" id="paymentNotes" name="paymentNotes"></textarea>
 					</div>
 				</div>
 				
-				<div class="row form-group">
+				<div class="row form-group" style="margin-left:.3em;">
 					<div class="control-group col-md-12 col-lg-12 col-sm-12 col-xs-12">
 						<label class="control-label" style="color:#800000;font-size: 12px;"><i>* Indicates mandatory fields.</i></label>
 					</div>
 				</div>
-		<!--5555-->
+			</div>
+		</div>
 	</div>
 
 	<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
@@ -274,9 +350,13 @@
 		let modeOfPayment = $('#modeOfPayment option:selected').val(); 
 		let toBank = $('#tobank option:selected').val();												//adithya removed comment
 		let DCtoBank = $('#DCtobank option:selected').val();											//adithya removed comment
-
-		//  let toBank = " "; 												                             //commented by adithya
-		// let DCtoBank = " ";	
+  
+		let name = document.getElementById("name1").value
+		let number = document.getElementById("number").value
+		let email = document.getElementById("email").value
+		let pan = $('#pan').val();
+		let adhaar =$('#adhaar').val();
+		let address = $('#address').val();
 
 		let paymentNotes = $('#paymentNotes').val();
 		let chequeNo = $('#chequeNo').val();<!--4-->
@@ -285,6 +365,25 @@
 		let branch = $('#branch').val();<!--4-->
 		let transactionId = $('#transactionId').val();<!--4-->
 		
+
+		if (document.getElementById("name1").value != "") {
+			$('#name1').css('border-color', "#000000");
+		} else {
+			$('#name1').css('border-color', "#FF0000");
+			++count;
+		}
+
+		if(amount >= 10000 && pan == ""){
+			
+			$('#pan').css('border-color', "#FF0000");
+			++count;
+		}else{
+			$('#pan').css('border-color', "#000000");
+		}
+		
+
+
+
 		<!--$('input[type=text]').each(function(){-->
 			<!--var id = this.id;-->
 			<!--if($('#' + id).val() != "") {-->
@@ -411,6 +510,22 @@
 			return false;
 		} else {
 			$('.modal-body').html("<label>DATE:</label> "+ "<?=date('d-m-Y'); ?>" +"<br/>");
+			$('.modal-body').append("<label>NAME:</label> "+ name +"<br/>");
+			if(number)
+				$('.modal-body').append("<label>NUMBER:</label> "+ number +"<br/>");
+			
+			if(email)
+				$('.modal-body').append("<label>EMAIL:</label> "+ email +"<br/>");
+			
+			if(address)
+				$('.modal-body').append("<label>ADDRESS:</label> "+ address +"<br/>");		
+			
+			$('.modal-body').append("<label>AMOUNT:</label> "+ amount +"<br/>");
+			if(pan)
+			$('.modal-body').append("<label>Pan No:</label> "+ pan +"<br/>");
+
+			if(adhaar)
+			$('.modal-body').append("<label>Adhaar No:</label> "+ adhaar +"<br/>");
 			if (document.getElementById("events_Radio").checked == false)
 				$('.modal-body').append("<label>DEITY:</label> "+ deity +"<br/>");
 			else

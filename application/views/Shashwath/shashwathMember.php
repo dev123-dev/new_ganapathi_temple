@@ -1456,8 +1456,7 @@
 				$.post(url1, {'name1': JSON.stringify(name1),'number1': JSON.stringify(number1),'number21': JSON.stringify(number21),'rashi1': JSON.stringify(rashi1),'gotra1': JSON.stringify(gotra1), 'nakshatra1': JSON.stringify(nakshatra1), 'addressLine11': JSON.stringify(addressLine11), 'addressLine21': JSON.stringify(addressLine21), 'city1': JSON.stringify(city1),'state1':JSON.stringify(state1), 'country1': JSON.stringify(country1), 'pincode1': JSON.stringify(pincode1),'remarks1': JSON.stringify(remarks1),'ispostage': JSON.stringify(ispostage),'smId':smId, 'memmanname': memmanname, 'memmannumber': memmannumber, 'memmannumber2': memmannumber2,'memmanaddr1':memmanaddr1,'memmanaddr2':memmanaddr2,'memmancity':memmancity,'memmanstate':memmanstate,'memmancountry':memmancountry,'memmanpin':memmanpin,'memmanremarks':memmanremarks }, function (e) {
 					e1 = e.split("|")
 					if (e1[0] == "success")
-						
-						location.href = "<?=site_url();?>Receipt/shashwathReceipt";
+ 					location.href = "<?=site_url();?>Receipt/shashwathReceipt";
 					else
 						alert("Something went wrong, Please try again after some time");
 				});
@@ -1494,6 +1493,8 @@
 		let name = $('#name').val()
 		let rashi = $('#rashi').val()
 		let gotra = $('#gotra').val()
+		let pan = $('#pan').val();
+		let adhaar = $('#adhaar').val();
 		let nakshatra = $('#nakshatra').val()
 		let paymentNotes = $('#paymentNotes').val();
 		let chequeNo = "";
@@ -1859,6 +1860,11 @@
 			$('.modal-body').append("<br/>");
 			if(smAddress)
 				$('.modal-body').append("<label>ADDRESS:</label> "+ smAddress +"<br/>");
+			if(pan)
+			$('.modal-body').append("<label>Pan No:</label> "+ pan +"<br/>");
+			if(adhaar)
+			$('.modal-body').append("<label>Adhaar No:</label> "+ adhaar +"<br/>");
+		
 		} else {
 			$('.modal-body').append("<label>NAME:</label> " + mandaliName + "");
 			if (mandaliPhone)

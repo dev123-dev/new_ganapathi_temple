@@ -1,9 +1,9 @@
 <div class="container">
 	<img class="img-responsive bgImg2 bg1" src="<?=site_url()?>images/TempleLogo.png" />
-	<img class="img-responsive bgImg2 bg2" src="<?=site_url()?>images/LAKSHMI.jpg" style="display:none;" />
+	<!-- <img class="img-responsive bgImg2 bg2" src="<?=site_url()?>images/LAKSHMI.jpg" style="display:none;" />
 	<img class="img-responsive bgImg2 bg3" src="<?=site_url()?>images/HANUMANTHA.jpg" style="display:none;" />
 	<img class="img-responsive bgImg2 bg4" src="<?=site_url()?>images/GARUDA.jpg" style="display:none;" />
-	<img class="img-responsive bgImg2 bg5" src="<?=site_url()?>images/GANAPATHI.jpg" style="display:none;" />
+	<img class="img-responsive bgImg2 bg5" src="<?=site_url()?>images/GANAPATHI.jpg" style="display:none;" /> -->
 	<div class="row form-group">
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 			<div class="col-lg-4 col-md-4  col-sm-4 col-xs-12">
@@ -77,6 +77,23 @@
 				</div>
 			</div>
 		</div>
+		<!-- new code added by adithya start -->
+		<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6" style="margin-left:10px">
+				<div class="form-group">
+					<label for="rashi">Pan No  </label>
+					<input type="hidden" id="baseurl" class="form-control" name="baseurl" value="<?php echo site_url(); ?>" />
+						<input type="text" class="form-control form_contct2" id="pan" placeholder="AJRPU1234T" name="pan">
+				</div>
+			</div>
+			<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+				<div class="form-group">
+					<label for="nakshatra">Adhaar No </label>
+					<input type="hidden" id="baseurl" name="baseurl" value="<?php echo site_url(); ?>" />
+						<input type="text" class="form-control form_contct2" id="adhaar" placeholder="321654987123" name="adhaar">
+				</div>
+			</div>
+		</div>
+		<!-- new code added by adithya end -->
 		<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 			<div class="col-lg-7 col-md-12 col-sm-6 col-xs-12">
 				<div class="form-group">
@@ -530,7 +547,9 @@
 		let bank = "";
 		let chequeDate = "";
 		let branch = "";
-		let fglhBank = "";														//laz new
+		let fglhBank = "";	
+		let pan = $('#pan').val();
+		let adhaar = $('#adhaar').val();													//laz new
 		let tableContent = getTableValues();
 		let modeOfPayment = $('#modeOfPayment option:selected').val();
 		let toBank = $('#tobank option:selected').val();						//laz
@@ -671,7 +690,7 @@
 			revFlag[i] = tableContent['revFlag'][i].innerHTML.trim();
 		}
 		
-		$.post(url, {'transactionId': transactionId, 'chequeNo': chequeNo, 'branch': branch, 'bank': bank, 'chequeDate': chequeDate, 'modeOfPayment': modeOfPayment, 'sevaName': JSON.stringify(sevaName), 'deityName': JSON.stringify(deityName), 'qty': JSON.stringify(qty), 'date': JSON.stringify(date), 'price': JSON.stringify(price), 'amt': JSON.stringify(amt), 'sevaId': JSON.stringify(sevaId), 'userId': JSON.stringify(userId), 'quantityChecker': JSON.stringify(quantityChecker), 'revFlag': JSON.stringify(revFlag), 'deityId': JSON.stringify(deityId), 'isSeva': JSON.stringify(isSeva), 'total': total, 'name': name, 'number': number, 'rashi': rashi, 'nakshatra': nakshatra, 'paymentNotes': paymentNotes, 'date_type': date_type, 'postage': postage, 'postageAmt': postageAmt, 'addressLine1': addressLine1, 'addressLine2': addressLine2, 'city': city, 'country': country, 'pincode': pincode,'address':address,'fglhBank': fglhBank }, function (e) {
+		$.post(url, {'transactionId': transactionId,'pan':pan,'adhaar':adhaar, 'chequeNo': chequeNo, 'branch': branch, 'bank': bank, 'chequeDate': chequeDate, 'modeOfPayment': modeOfPayment, 'sevaName': JSON.stringify(sevaName), 'deityName': JSON.stringify(deityName), 'qty': JSON.stringify(qty), 'date': JSON.stringify(date), 'price': JSON.stringify(price), 'amt': JSON.stringify(amt), 'sevaId': JSON.stringify(sevaId), 'userId': JSON.stringify(userId), 'quantityChecker': JSON.stringify(quantityChecker), 'revFlag': JSON.stringify(revFlag), 'deityId': JSON.stringify(deityId), 'isSeva': JSON.stringify(isSeva), 'total': total, 'name': name, 'number': number, 'rashi': rashi, 'nakshatra': nakshatra, 'paymentNotes': paymentNotes, 'date_type': date_type, 'postage': postage, 'postageAmt': postageAmt, 'addressLine1': addressLine1, 'addressLine2': addressLine2, 'city': city, 'country': country, 'pincode': pincode,'address':address,'fglhBank': fglhBank }, function (e) {
 																		//************ laz new  ,'fglhBank': fglhBank *************** 
 			e1 = e.split("|")
 			if (e1[0] == "success")
@@ -1093,7 +1112,7 @@
 
 	function sevaComboChange() {
 		eventSeva = $('#sevaCombo').val();
-		eventSeva = eventSeva.split("|");
+		eventSeva = eventSeva && eventSeva.split("|");
 		let sevaCombo = getSevaCombo();
 		if ($('#radioOpt').val() != "EveryRadio") {
 			if (sevaCombo.isSeva == "0") {
@@ -1739,21 +1758,21 @@
 
 	function getSevaCombo() {
 		let sevaCombo = $('#sevaCombo option:selected').val();
-		sevaCombo = sevaCombo.split("|");
-		let sevaPrice = sevaCombo[4]
+		sevaCombo =sevaCombo && sevaCombo.split("|");
+		let sevaPrice = sevaCombo && sevaCombo[4]
 		
 		return {
-			deityId: sevaCombo[0],
-			sevaId: sevaCombo[1],
-			sevaName: sevaCombo[2],
-			userId: sevaCombo[3],
+			deityId: sevaCombo && sevaCombo[0],
+			sevaId: sevaCombo && sevaCombo[1],
+			sevaName: sevaCombo && sevaCombo[2],
+			userId: sevaCombo && sevaCombo[3],
 			sevaPrice: sevaPrice,
-			quantityChecker: sevaCombo[5],
-			isSeva: sevaCombo[6],
-			old_price: sevaCombo[7],
-			revision_status: sevaCombo[8],
+			quantityChecker: sevaCombo && sevaCombo[5],
+			isSeva:sevaCombo &&  sevaCombo[6],
+			old_price:sevaCombo &&  sevaCombo[7],
+			revision_status: sevaCombo && sevaCombo[8],
 			
-			revision_date: sevaCombo[9]
+			revision_date:sevaCombo &&  sevaCombo[9]
 		}
 	}
 

@@ -3,7 +3,7 @@
 	<div class="row form-group">
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 			<div class="col-lg-4 col-md-4  col-sm-4 col-xs-12">
-				<span class="eventsFont2">Seva Receipt  </span>
+				<span class="eventsFont2">Seva Receipt</span>
 			</div>
 			<div class="col-lg-6  col-md-6 col-sm-7 col-xs-10">
 				<span class="eventsFont2 samFont1"><?=$event['TET_NAME']; ?></span>
@@ -68,6 +68,23 @@
 				</div>
 			</div>
 		</div>
+		<!-- new code for pan and adhaar start by adithya -->
+		<div class= "col-lg-6 col-md-6 col-sm-12 col-xs-9">
+			<div class="form-group">
+			  <label for="pan">Pan No </label>
+			  <input type="hidden" id="baseurl" name="baseurl" value="<?php echo site_url(); ?>" />
+					<input type="text" class="form-control form_contct2" id="pan" placeholder="AJRJR2345T" name="pan">
+			</div>
+		</div>
+	
+		<div class= "col-lg-6 col-md-6 col-sm-12 col-xs-9">
+			<div class="form-group">
+			  <label for="Adhaar">Adhaar No </label>
+			  <input type="hidden" id="baseurl" name="baseurl" value="<?php echo site_url(); ?>" />
+					<input type="text" class="form-control form_contct2" id="adhaar" placeholder="9876543211235" name="adhaar">
+			</div>
+		</div>
+		<!-- new code for pan and adhaar end by adithya -->
 	</div> <!-- first column ends -->
 
 	<div class= "col-lg-6 col-md-6 col-sm-6 col-xs-12">
@@ -414,8 +431,7 @@
 	var minDate1 = new Date(Number(fromDate[2]), (Number(fromDate[1])-1), +(Number(fromDate[0]))); 
 	var maxDate1 =  new Date(Number(toDate[2]), (Number(toDate[1])-1), + Number(toDate[0]));
 
-	console.log(minDate1);
-	console.log(maxDate1);
+	
 	
 	$('#submit').on('click', function() {
 		if(tableContent.length == 0) {
@@ -440,6 +456,8 @@
 		let branch = "";
 		let name = $('#name').val() 
 		let multiDate =	"";	
+		let pan = $('#pan').val();
+		let adhaar = $('#adhaar').val()
 		
 		if($('.multiDate').is(':visible')) {
 			multiDate = $('#multiDate').val();
@@ -673,6 +691,8 @@
 				'country': country,
 				'pincode': pincode,
 				'address':address,
+				'pan':pan,
+				'adhaar':adhaar,
 				'flghBank': flghBank 
 						}, function(e) {
 				

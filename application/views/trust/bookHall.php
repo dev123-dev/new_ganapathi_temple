@@ -65,6 +65,23 @@ th, td {
 				<input type="text" class="form-control form_contct2" id="address" placeholder="" name="address">
 			</div>
 		</div>
+
+		<!-- new code for adhaar and pan start by adithya -->
+<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="margin-bottom: 1.5em;margin-top:10px">
+					<div class="form-inline">
+					  <label for="pan">Pan No </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					  <input type="text" class="form-control form_contct2" id="pan" placeholder="AFHYT5678Y" name="pan" style="width: 50%;">
+					</div>
+				</div>
+				
+				<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="margin-bottom: 1.5em; margin-left:-150px;margin-top:10px">
+					<div class="form-inline">
+					  <label for="adhaar">Adhaar No </label>&nbsp;&nbsp;&nbsp;
+					  <input type="text" class="form-control form_contct2" id="adhaar" placeholder="987456321234" name="adhaar" style="width: 50%;">
+					</div>
+				</div>
+<!-- new code for adhaar and pan end by adithya -->
+
 		<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
 			<div class="form-group">
 				<label for="hallCombo">Hall </label>
@@ -598,6 +615,8 @@ $('#submit').on('click', function () {
 	let tableContent = getTableValues();
 	let templeContent = getTableValuesTemple();
 	let trustContent = getTableValuesTrust();
+	let pan = $('#pan').val();
+	let adhaar = $('#adhaar').val()
 
 	if (tableContent['hallComboName'].length == 0) {
 		alert("Information", "Book atleast one Hall to submit.");
@@ -673,6 +692,8 @@ $('#submit').on('click', function () {
 	$.post(url, {
 		phone,
 		name,
+		'pan':pan,
+		'adhaar':adhaar,
 		address,
 		pymtType,
 		hellComboId,

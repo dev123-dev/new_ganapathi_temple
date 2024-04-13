@@ -176,6 +176,8 @@ class Trust extends CI_Controller {
 		$phone = $_POST['phone'];
 		$address = $_POST['address'];
 		$pymtType = $_POST['pymtType'];
+		$pan = $_POST['pan'];
+		$adhaar = $_POST['adhaar'];
 
 		$hellComboId = json_decode($_POST['hellComboId']);
 		$hallComboName = json_decode($_POST['hallComboName']);
@@ -381,7 +383,9 @@ class Trust extends CI_Controller {
 					'IS_TRUST'=>1,
 					'RECEIPT_HB_ID'=>$TRUST_HALL_BOOKING_ID,
 					'FGLH_ID' => $fglhBankTemple[$j],
-					'KANIKE_FOR' => $kanike_for						//laz new ..
+					'KANIKE_FOR' => $kanike_for	,
+					'RECEIPT_PAN_NO'=>$pan,
+					'RECEIPT_ADHAAR_NO'=>$adhaar							//laz new ..
 				);
 				
 				$this->db->insert('DEITY_RECEIPT', $DEITY_RECEIPT);
@@ -451,7 +455,9 @@ class Trust extends CI_Controller {
 					'DATE_TIME'=>$todayDateTimeDMY,
 					'EOD_CONFIRMED_BY_ID'=>0,
 					'AUTHORISED_STATUS'=>"No",//,
-					'T_FGLH_ID' => $fglhBankTrust[$k]						//edited by adithya itwas in comment before
+					'T_FGLH_ID' => $fglhBankTrust[$k],
+					'RECEIPT_PAN_NO'=>$pan,
+					'RECEIPT_ADHAAR_NO'=>$adhaar						//edited by adithya itwas in comment before
 				);
 				
 				$this->db->insert('TRUST_RECEIPT', $TRUST_RECEIPT);

@@ -3393,7 +3393,8 @@ class Receipt extends CI_Controller {
 		$number = @$_POST['number'];
 		$rashi = @$_POST['rashi'];
 		$nakshatra = @$_POST['nakshatra'];
-		
+		$pan = @$_POST['pan'];
+		$adhaar = @$_POST['adhaar'];
 		$date_type = @$_POST['date_type'];
 		
 		$sevaName = json_decode(@$_POST['sevaName']);
@@ -3488,7 +3489,9 @@ class Receipt extends CI_Controller {
 			'CITY' => $city,
 			'COUNTRY' => $country,
 			'PINCODE' => $pincode ,							//laz new		
-			'FGLH_ID' => $fglhBank							//laz new ..
+			'FGLH_ID' => $fglhBank,
+			'RECEIPT_PAN_NO'=>$pan,
+			'RECEIPT_ADHAAR_NO'=>$adhaar							//laz new ..
 		); 
 		
 		$this->db->insert('DEITY_RECEIPT', $data);
@@ -3942,8 +3945,8 @@ class Receipt extends CI_Controller {
 		$country = json_decode(@$_POST['country']);
 		$pincode = json_decode(@$_POST['pincode']);
 		$address = json_decode(@$_POST['address']);
-		$pan = json_decode(@$_POST['pan']);
-		$adhaar = json_decode(@$_POST['adhaar']);
+		$pan = @$_POST['pan'];
+		$adhaar = @$_POST['adhaar'];
 		
 		$addrline1 = strtoupper(@$_POST['memmanaddr1']);
 		$addrline2 = strtoupper(@$_POST['memmanaddr2']);
@@ -4101,7 +4104,7 @@ class Receipt extends CI_Controller {
 				$paymentStatus = "Completed";
 			}
 			
-			if(strtotime($todayDate) > strtotime($financeBookBeginDate)) {	
+		
 			 	$receiptData = array(
 					'SS_ID'   =>$SS_ID,											
 					'RECEIPT_NAME'=>$name,											
@@ -4124,11 +4127,7 @@ class Receipt extends CI_Controller {
 					'RECEIPT_ACTIVE'=>1,											
 					'RECEIPT_CATEGORY_ID'=>7,											
 					'PAYMENT_STATUS'=>$paymentStatus,											
-					'AUTHORISED_STATUS'=> 'No',											
-			/*		'EOD_CONFIRMED_BY_ID' => 33,											
-					'EOD_CONFIRMED_BY_NAME' => 'C. Suresh Bhat',											
-					'EOD_CONFIRMED_DATE_TIME' => date('d-m-Y H:i:s A'),											
-					'EOD_CONFIRMED_DATE' => date('d-m-Y'),*/											
+					'AUTHORISED_STATUS'=> 'No',																			
 					'DATE_TYPE'=>$date_type,											
 					'RECEIPT_ADDRESS' => $sm_address,											
 					'POSTAGE_CHECK' => (($postage[$i] == "YES")?1:0),											
@@ -4142,58 +4141,10 @@ class Receipt extends CI_Controller {
 					'FGLH_ID' => $fglhBank,							//laz new ..
 					'SS_RECEIPT_NO_REF' => $ss_receipt_no,
 					'RECEIPT_PAN_NO'=>$pan,
-			    'RECEIPT_ADHAAR_NO'=>$adhaar		
+			        'RECEIPT_ADHAAR_NO'=>$adhaar		
 
 				); 
-			}
-			else {
-				$receiptData = array(
-				'SS_ID'   =>$SS_ID,
-				'RECEIPT_NAME'=>$name,
-				'RECEIPT_NO'=>$shashwathReceipt,
-				'RECEIPT_DATE'=>$todayDate,
-				'RECEIPT_PHONE'=>$number,
-				'RECEIPT_PRICE'    => $corpus[$i],
-				'RECEIPT_PAYMENT_METHOD'=>$modeOfPayment,
-				'BRANCH_NAME'=>$branch,
-				'CHEQUE_NO'=>$chequeNo,
-				'BANK_NAME'=>$bank,
-				'CHEQUE_DATE'=>$chequeDate,
-				'TRANSACTION_ID'=>$transactionId,
-				'RECEIPT_PAYMENT_METHOD_NOTES'=>$paymentNotes,
-				'RECEIPT_RASHI'=>$rashi,
-				'RECEIPT_NAKSHATRA'=>$nakshatra,
-				'RECEIPT_ISSUED_BY_ID'=>$_SESSION['userId'],
-				'RECEIPT_ISSUED_BY'=>$_SESSION['userFullName'],
-				'DATE_TIME' => $dateTime,
-				'RECEIPT_ACTIVE'=>1,
-				'RECEIPT_CATEGORY_ID'=>7,
-				'PAYMENT_STATUS'=>$paymentStatus,
-				'AUTHORISED_STATUS'=> 'Yes',
-				'AUTHORISED_BY' => 33,
-				'AUTHORISED_BY_NAME' => 'C. Suresh Bhat',
-				'AUTHORISED_DATE_TIME' => date('d-m-Y H:i:s A'),
-				'AUTHORISED_DATE' => date('d-m-Y'),
-				'EOD_CONFIRMED_BY_ID' => 33,
-				'EOD_CONFIRMED_BY_NAME' => 'C. Suresh Bhat',
-				'EOD_CONFIRMED_DATE_TIME' => date('d-m-Y H:i:s A'),
-				'EOD_CONFIRMED_DATE' => date('d-m-Y'),
-				'DATE_TYPE'=>$date_type,
-				'RECEIPT_ADDRESS' => $sm_address,
-				'POSTAGE_CHECK' => (($postage[$i] == "YES")?1:0),
-				'POSTAGE_GROUP_ID' => 1,
-				'ADDRESS_LINE1' => strtoupper($addressLine1[$i]),
-				'ADDRESS_LINE2' => strtoupper($addressLine2[$i]),
-				'CITY' => strtoupper($city[$i]),
-				'STATE' => strtoupper($state[$i]),
-				'COUNTRY' => strtoupper($country[$i]),
-				'PINCODE' => $pincode[$i],
-				'FGLH_ID' => $fglhBank,						//laz new ..
-				'SS_RECEIPT_NO_REF' => $ss_receipt_no ,
-				'RECEIPT_PAN_NO'=>$pan,
-			    'RECEIPT_ADHAAR_NO'=>$adhaar		
-			); 
-			}
+			
 			
 			$this->db->insert('DEITY_RECEIPT', $receiptData);
 			$SHASHWATH_RECEIPT = $this->db->insert_id();

@@ -379,7 +379,8 @@ class TrustEvents extends CI_Controller {
 		$etName = $_POST['etName'];
 		$paymentNotes = $_POST['paymentNotes'];
 		$flghBank = @$_POST['flghBank'];							//slap //laz new
-		
+		$pan = @$_POST['pan'];
+		$adhaar = @$_POST['adhaar']	;		
 
 		$todayDate = date('d-m-Y');
 		$dateTime = date('d-m-Y H:i:s A');
@@ -545,7 +546,9 @@ class TrustEvents extends CI_Controller {
 			'CITY' => $city,
 			'COUNTRY' => $country,
 			'PINCODE' => $pincode,   //,	
-			'T_FGLH_ID' => $flghBank							//laz new ..
+			'T_FGLH_ID' => $flghBank,
+			'TET_RECEIPT_PAN_NO'=>$pan,
+			'TET_RECEIPT_ADHAAR_NO'=>$adhaar						//laz new ..
 
 		); 
 		

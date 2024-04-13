@@ -669,12 +669,17 @@ class TrustReceipt extends CI_Controller {
 	//RECIEPT FOR HUNDI SAVE
 	function receipt_hundi_save() {
 		$_SESSION['duplicate'] = "no";
-		$transcId = "";$chequeNo = "";$chequeDate = "";$bank = "";$branch = "";$fglhBank ="";			//laz new; //declaring and initializing variables
+		$pan = "";$adhaar="";$transcId = "";$chequeNo = "";$chequeDate = "";$bank = "";$branch = "";$fglhBank ="";			//laz new; //declaring and initializing variables
 		
 		if(isset($_POST["transactionId"])) { //checking whether  set
 			$transcId = $this->input->post('transactionId');//fetching transaction id from view
 		}
-
+		if(isset($_POST["pan"])) { //checking whether  set
+			$pan = $this->input->post('pan');//fetching transaction id from view
+		}
+		if(isset($_POST["adhaar"])) { //checking whether  set
+			$adhaar = $this->input->post('adhaar');//fetching transaction id from view
+		}
 		if(isset($_POST["chequeNo"])) {//checking whether  set
 			$chequeNo = $this->input->post('chequeNo');//fetching chequeNo from view
 		}
@@ -726,6 +731,12 @@ class TrustReceipt extends CI_Controller {
 		$data = array(
 			'TET_RECEIPT_NO'=> $receiptFormat,
 			'TET_RECEIPT_DATE'=> date('d-m-Y'),
+			'TET_RECEIPT_NAME' => $this->input->post('name1'),
+				'TET_RECEIPT_PHONE' => $this->input->post('number'),
+				'TET_RECEIPT_EMAIL' => $this->input->post('email'),
+				'TET_RECEIPT_ADHAAR_NO' =>$adhaar ,
+				'TET_RECEIPT_PAN_NO' => $pan,
+				'TET_RECEIPT_ADDRESS' => $this->input->post('addLine1'),
 			'TET_RECEIPT_PAYMENT_METHOD'=> $this->input->post('modeOfPayment'),
 			'CHEQUE_NO' => $chequeNo,
 			'CHEQUE_DATE' => $chequeDate,
@@ -786,12 +797,17 @@ class TrustReceipt extends CI_Controller {
 	//RECEIPT FOR EVENT DONATION SAVE
 	function receipt_dk_save() {
 		$_SESSION['duplicate'] = "no";
-		$transcId = "";$chequeNo = "";$chequeDate = "";$bank = "";$branch = ""; $fglhBank ="";			//laz new;
+		$pan="";$adhaar="";$transcId = "";$chequeNo = "";$chequeDate = "";$bank = "";$branch = ""; $fglhBank ="";			//laz new;
 		
 		if(isset($_POST["transactionId"])) {
 			$transcId = $this->input->post('transactionId');
 		}
-
+		if(isset($_POST["pan"])) {
+			$pan = $this->input->post('pan');
+		}
+		if(isset($_POST["adhaar"])) {
+			$adhaar = $this->input->post('adhaar');
+		}
 		if(isset($_POST["chequeNo"])) {
 			$chequeNo = $this->input->post('chequeNo');
 		}
@@ -883,7 +899,9 @@ class TrustReceipt extends CI_Controller {
 			'CITY' => $city,
 			'COUNTRY' => $country,
 			'PINCODE' => $pincode,                                //,
-			'T_FGLH_ID' => $fglhBank							//Uncommented by adithya
+			'T_FGLH_ID' => $fglhBank,
+			'TET_RECEIPT_PAN_NO'=>$pan,
+			'TET_RECEIPT_ADHAAR_NO'=>$adhaar							//Uncommented by adithya
 		); 
 		$receiptId = $this->obj_receipt->add_receipt_hundi_event_modal($data);
 		$_SESSION['receiptId'] = $receiptId;
@@ -1067,12 +1085,17 @@ class TrustReceipt extends CI_Controller {
 	function save_new_trust_receipt() {
 
 		$_SESSION['duplicate'] = "no";
-		$transcId = "";$chequeNo = "";$chequeDate = "";$bank = "";$branch = "";$fglhBank ="";			//laz new;
+		$pan="";$adhaar="";$transcId = "";$chequeNo = "";$chequeDate = "";$bank = "";$branch = "";$fglhBank ="";			//laz new;
 		
 		if(isset($_POST["transactionId"])) {
 			$transcId = $this->input->post('transactionId');
 		}
-
+		if(isset($_POST["pan"])) {
+			$pan = $this->input->post('pan');
+		}
+		if(isset($_POST["adhaar"])) {
+			$adhaar = $this->input->post('adhaar');
+		}
 		if(isset($_POST["chequeNo"])) {
 			$chequeNo = $this->input->post('chequeNo');
 		}
@@ -1089,7 +1112,7 @@ class TrustReceipt extends CI_Controller {
 	    if($this->input->post('modeOfPayment') == "Cash") {
 		$FH_ID = $this->input->post('financialHeads');
 		$this->db->select('T_FGLH_ID')->from('FINANCIAL_HEAD')
-		->where(array('FH_ID'=>$FH_ID));
+		->where(array('FH_ID'=>explode("|",$FH_ID)[0]));
 		$query = $this->db->get();
 
 		$T_FGLH_ID = $query->first_row();
@@ -1162,7 +1185,9 @@ class TrustReceipt extends CI_Controller {
 			'HB_ID'=>0,
 			'EOD_CONFIRMED_BY_ID'=>0,
 			'AUTHORISED_STATUS '=>'No',//,
-			'T_FGLH_ID' => $fglhBank							//laz new ..
+			'T_FGLH_ID' => $fglhBank,
+			'RECEIPT_PAN_NO'=>$pan,
+			'RECEIPT_ADHAAR_NO'=>$adhaar							//laz new ..
 		);
 		
 		$receiptId = $this->obj_receipt->add_receipt_trust_modal($data);

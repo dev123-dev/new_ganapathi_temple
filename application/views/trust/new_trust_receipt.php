@@ -50,6 +50,22 @@
 					</div>
 				</div>
 				
+<!-- new code for adhaar and pan start by adithya -->
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-bottom: 1.5em;">
+					<div class="form-inline">
+					  <label for="pan">Pan No </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					  <input type="text" class="form-control form_contct2" id="pan" placeholder="AFHYT5678Y" name="pan" style="width: 70%;">
+					</div>
+				</div>
+				
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-bottom: 1.5em;">
+					<div class="form-inline">
+					  <label for="adhaar">Adhaar No </label>&nbsp;
+					  <input type="text" class="form-control form_contct2" id="adhaar" placeholder="987456321234" name="adhaar" style="width: 70%;">
+					</div>
+				</div>
+<!-- new code for adhaar and pan end by adithya -->
+
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-bottom: 1.5em;">
 					<div class="form-inline">
 					  <label for="number">Address </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -280,6 +296,8 @@
 		let bank = $('#bank').val();
 		let branch = $('#branch').val();
 		let transactionId = $('#transactionId').val();
+		let pan = $('#pan').val();
+		let adhaar =$('#adhaar').val();
 		
 		if($('#number').val() != "") {
 			if($('#number').val().length < 10) {
@@ -300,6 +318,14 @@
 		} else {
 			$('#amount').css('border-color', "#FF0000");
 			++count;
+		}
+
+		if(amount >= 10000 && pan == ""){
+			
+			$('#pan').css('border-color', "#FF0000");
+			++count;
+		}else{
+			$('#pan').css('border-color', "#000000");
 		}
 				
 				
@@ -385,7 +411,8 @@
 				++count;
 			}																			
 		} 																		//here
-		
+		console.log("count",count)
+
 		if(count != 0) {
 			alert("Information","Please fill required fields","OK");
 			return false;
@@ -401,6 +428,13 @@
 
 			$('.modal-body').append("<label>Financial Head:</label> "+ financialHead +"<br/>");
 			$('.modal-body').append("<label>AMOUNT:</label> "+ amount +"<br/>");
+
+			if(pan)
+			$('.modal-body').append("<label>Pan No:</label> "+ pan +"<br/>");
+
+			if(adhaar)
+			$('.modal-body').append("<label>Adhaar No:</label> "+ adhaar +"<br/>");
+
 
 			if(modeOfPayment == "Cheque") {
 				$('.modal-body').append("<label>CHEQUE NO:</label> "+ chequeNo +",&nbsp;&nbsp;");

@@ -171,7 +171,7 @@ public function index($start=0){
 		$data['date'] = $date = $everyDate = $_SESSION['generateDate'];
 	}
 	$selectedSsDate = date($date);
-	$oneYrLessSelDate = date("d-m-Y",strtotime($selectedSsDate."-1 year"));
+	$oneYrLessSelDate = date("d-m-Y",strtotime($selectedSsDate)); //"-1 year"
 
 	$data['calendarCheck'] = $thithi_codes = $this->obj_shashwath->getThithiCode($date);  //$thithi_codes to be used before the generate button is clicked
 	$data['calendarCheckRoi'] = $thithi_codes_roi = $this->obj_shashwath->getThithiCodeROI($date);
